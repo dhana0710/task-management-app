@@ -3,7 +3,7 @@ const taskContainer = document.querySelector(".task__container");
 let globalTaskData = [];
 
 const generateHTML = (taskData) => {
-    ` <div id=${taskData.id} class="col-md-6 col-lg-4 my-4">
+    return ` <div id=${taskData.id} class="col-md-6 col-lg-4 my-4">
 <div class="card">
   <div class="card-header gap-2 d-flex justify-content-end">
     <button class="btn btn-outline-info" name=${taskData.id} onclick="editCard.apply(this, arguments)" >
@@ -18,6 +18,7 @@ const generateHTML = (taskData) => {
       src="${taskData.image}"
       alt="image"
       class="card-img"
+      id="imgg"
     />
     <h5 class="card-title mt-4">${taskData.title}</h5>
     <p class="card-text">
@@ -84,3 +85,27 @@ const loadExistingCard = () => {
 
     return;
 }
+
+const deleteCard = (event) => {
+
+    const targetID = event.target.getAttribute("name");
+    const elementType = event.target.tagName;
+
+    const removeTask = globalTaskData.filter((task) => task.id !== targetID); //if condition true, then save
+    globalTaskData = removeTask;
+
+    //update the localStroage
+    localStorage.setItem("taskYY", JSON.stringify({ cards: globalTaskData }));
+
+    //Access DOM to remove card
+    if (elementType === "BUTTON") {
+        return taskContainer.removeChild(
+            event.target.parentNode.parentNode.parentNode
+        );
+    } else {
+        return taskContainer.removeChild(
+            event.target.parentNode.parentNode.parentNode.parentNode
+        );
+    }
+
+};
