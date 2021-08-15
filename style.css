@@ -12,3 +12,22 @@ body {
     height: 300px;
     object-fit: contain;
 }
+
+.place__holder__image {
+    height: 200px;
+    width: 100%;
+}
+
+.task__card {
+    cursor: pointer;
+}
+
+.task__card:hover {
+    border: 1px solid #4582ec;
+}
+
+#place__holder__image {
+    height: 400px;
+    width: 100%;
+    object-fit: fill;
+}
